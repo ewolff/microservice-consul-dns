@@ -1,0 +1,41 @@
+version: '3'
+services:
+  consul:
+    image: consul:1.0.0
+    command: consul agent -dev -recursor=8.8.8.8 -client 0.0.0.0
+    environment:
+      - CONSUL_ALLOW_PRIVILEGED_PORTS
+    ports:
+      - "8500:8500"
+      - "53:8600/udp"
+  registrator:
+    command: -internal consul://consul:8500
+    image: gliderlabs/registrator:latest 
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    links:
+      - consul
+  customer:
+    build: ../microservice-consuldns-demo/microservice-consuldns-demo-customer
+  catalog:
+    build: ../microservice-consuldns-demo/microservice-consuldns-demo-catalog
+  order:
+    build: ../microservice-consuldns-demo/microservice-consuldns-demo-order
+    dns: ${CONSUL_HOST}
+    dns_search: .service.consul
+  apache:
+    build: apache
+    links:
+     - consul
+    depends_on:
+     - consul
+    ports:
+     - "8080:80"
+    dns: ${CONSUL_HOST}
+    dns_search: .service.consul
+  hystrix-dashboard:
+    build: ../microservice-consuldns-demo/microservice-consuldns-demo-hystrix-dashboard
+    links:
+     - consul
+    ports:
+     - "8989:8989"
