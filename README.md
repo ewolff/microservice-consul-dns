@@ -95,9 +95,9 @@ The servers for the infrastructure components are pretty simple thanks to Spring
 
 The microservices are:
 
-- [microservice-consul-demo-catalog](microservice-consul-demo-catalog) is the application to take care of items.
-- [microserivce-consul-demo-customer](microserivce-consul-demo-customer) is responsible for customers.
-- [microservice-consul-demo-order](microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
+- [microservice-consuldns-demo-catalog](microservice-consuldns-demo/microservice-consuldns-demo-catalog) is the application to take care of items.
+- [microservice-consuldns-demo-customer](microservice-consuldns-demo/microservice-consuldns-demo-customer) is responsible for customers.
+- [microservice-consuldns-demo-order](microservice-consuldns-demo/microservice-consuldns-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
 
 
 The microservices have a Java main application in `src/test/java` to run them stand alone. `microservice-demo-order` uses a stub for the other services then. Also there are tests that use _consumer-driven contracts_. That is why it is ensured that the services provide the correct interface. These CDC tests are used in microservice-demo-order to verify the stubs. In `microservice-demo-customer` and `microserivce-demo-catalog` they are used to verify the implemented REST services.
