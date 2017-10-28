@@ -9,8 +9,10 @@ This sample is like the sample that you can find at
 
 This demo uses [Hashicorp Consul](https://www.consul.io) for service
 discovery and Apache httpd as a reverse proxy to route the calls to
-the services and as a load balancer. However, this demo uses Consul as
-a DNS server and Registrator to register all the Docker
+the services and as a load balancer. This demo uses Consul as
+a DNS server. So the services use a hostname to lookup other
+services. [Registrator](https://github.com/gliderlabs/registrator)
+automatically registers all Docker
 Containers. Therefore the code has no dependencies on Consul.
 
 This project creates a complete microservice demo system in Docker
@@ -31,15 +33,19 @@ host. Also the homepage at port 8080 contains a link to the Consul UI
 Also you can use Consul's DNS interface with e.g. dig:
 
 ```
-dig @192.168.99.100 order.service.consul.
-dig @192.168.99.100 order.service.consul. ANY
-dig @192.168.99.100 order.service.consul. SRV
+dig @localhost order.service.consul.
+dig @localhost order.service.consul. ANY
+dig @localhost order.service.consul. SRV
 ```
 
 Note that the demo uses the original
 [Consul Docker image](https://hub.docker.com/_/consul/) provided by
 Hashicorp. However, the demo does not use a Consul cluster and only
 stores the data in memory i.e. it is certainly not fit for production.
+
+The Consul DNS interface is mapped to port 53 on the Docker Host. The
+Docker containers are configured with to use the IP adress of the
+Docker Host as the DNS server.
 
 [Registrator](https://github.com/gliderlabs/registrator) registers all
 Docker containers including the Spring Cloud microservices (customer,
