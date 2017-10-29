@@ -8,12 +8,15 @@ This sample is like the sample that you can find at
  https://github.com/ewolff/microservice-consul .
 
 This demo uses [Hashicorp Consul](https://www.consul.io) for service
-discovery and Apache httpd as a reverse proxy to route the calls to
-the services and as a load balancer. This demo uses Consul as
-a DNS server. So the services use a hostname to lookup other
-services. [Registrator](https://github.com/gliderlabs/registrator)
-automatically registers all Docker
-Containers. Therefore the code has no dependencies on Consul.
+discovery and Apache httpd as a reverse proxy to route and load balance
+calls to services. It uses Consul as a DNS server for service discovery. 
+Service names are postfixed with `.service.consul`on registration with Consul 
+through [Registrator](https://github.com/gliderlabs/registrator)
+which monitors the Unix Socket `docker.sock` and automatically registers and deregisteres 
+all Docker Containers running on a host. Services resolve their 
+communication partner's current IP addresses over ordinary DNS resolution, 
+thereby making service implementations independent 
+of any Consul-specific APIs.
 
 This project creates a complete microservice demo system in Docker
 containers. The services are implemented in Java using Spring and
