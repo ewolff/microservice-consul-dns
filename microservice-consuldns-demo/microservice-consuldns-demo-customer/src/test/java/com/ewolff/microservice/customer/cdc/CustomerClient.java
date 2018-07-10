@@ -25,7 +25,6 @@ public class CustomerClient {
 	private RestTemplate restTemplate;
 	private String customerServiceHost;
 	private long customerServicePort;
-	private boolean useRibbon;
 
 	static class CustomerPagedResources extends PagedResources<Customer> {
 
@@ -34,13 +33,11 @@ public class CustomerClient {
 	@Autowired
 	public CustomerClient(
 			@Value("${customer.service.host:customer}") String customerServiceHost,
-			@Value("${customer.service.port:8080}") long customerServicePort,
-			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
+			@Value("${customer.service.port:8080}") long customerServicePort) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.customerServiceHost = customerServiceHost;
 		this.customerServicePort = customerServicePort;
-		this.useRibbon = useRibbon;
 	}
 
 	public boolean isValidCustomerId(long customerId) {

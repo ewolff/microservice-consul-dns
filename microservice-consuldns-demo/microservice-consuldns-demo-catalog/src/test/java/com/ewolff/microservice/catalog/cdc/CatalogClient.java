@@ -26,18 +26,15 @@ public class CatalogClient {
 	private final RestTemplate restTemplate;
 	private final String catalogServiceHost;
 	private final long catalogServicePort;
-	private final boolean useRibbon;
 
 	@Autowired
 	public CatalogClient(
 			@Value("${catalog.service.host:catalog}") String catalogServiceHost,
-			@Value("${catalog.service.port:8080}") long catalogServicePort,
-			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
+			@Value("${catalog.service.port:8080}") long catalogServicePort) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
 		this.catalogServicePort = catalogServicePort;
-		this.useRibbon = useRibbon;
 	}
 
 	protected RestTemplate getRestTemplate() {
@@ -51,7 +48,7 @@ public class CatalogClient {
 		converter.setObjectMapper(mapper);
 
 		return new RestTemplate(
-				Collections.<HttpMessageConverter<?>> singletonList(converter));
+				Collections.<HttpMessageConverter<?>>singletonList(converter));
 	}
 
 	public double price(long itemId) {
@@ -66,7 +63,7 @@ public class CatalogClient {
 
 	private String catalogURL() {
 		return "http://" + catalogServiceHost + ":" + catalogServicePort
-					+ "/catalog/";
+				+ "/catalog/";
 	}
 
 	public Item getOne(long itemId) {
