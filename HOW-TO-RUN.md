@@ -184,3 +184,7 @@ Hystrix dashboard on http://localhost:8989/ and the Consul dashboard
 at http://localhost:8500 .
 
 You can terminate all containers using `docker-compose down`.
+
+If the order container cannot find the other containers, make sure
+that no firewall is running on the Docker host. At least on Mac OS X
+the firewall blocks the DNS requests.

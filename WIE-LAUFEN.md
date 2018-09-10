@@ -201,3 +201,7 @@ zugreigen, auf das Hystrix Dashboard unter http://localhost:8989/ und
 auf das Consul Dashboard unter http://localhost:8500 .
 
 Mit `docker-compose down` kannst Du alle Container beenden.
+
+Wenn der Order-Container die anderen Container nicht finden kann,
+schalte die Firewall auf dem Docker Host aus. Zumindest unter Mac OS X
+unterbindet die Firewall die DNS-Zugriffe.
