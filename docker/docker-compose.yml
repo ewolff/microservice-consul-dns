@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   consul:
-    image: consul:1.2.0
+    image: consul:1.3.0
     command: consul agent -dev -recursor=8.8.8.8 -client 0.0.0.0
     environment:
       - CONSUL_ALLOW_PRIVILEGED_PORTS
