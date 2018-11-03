@@ -36,7 +36,8 @@ public class CatalogClient {
 	private Collection<Item> itemsCache = null;
 
 	@Autowired
-	public CatalogClient(@Value("${catalog.service.host:msconsuldns_catalog}") String catalogServiceHost,
+	public CatalogClient(
+			@Value("${catalog.service.host:msconsuldns-catalog.service.consul}") String catalogServiceHost,
 			@Value("${catalog.service.port:8080}") long catalogServicePort,
 			@Autowired RestTemplate restTemplate) {
 		super();

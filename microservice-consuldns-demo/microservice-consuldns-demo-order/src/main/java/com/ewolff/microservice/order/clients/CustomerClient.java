@@ -35,7 +35,8 @@ public class CustomerClient {
 	}
 
 	@Autowired
-	public CustomerClient(@Value("${customer.service.host:msconsuldns_customer}") String customerServiceHost,
+	public CustomerClient(
+			@Value("${customer.service.host:msconsuldns-customer.service.consul}") String customerServiceHost,
 			@Value("${customer.service.port:8080}") long customerServicePort,
 			@Autowired RestTemplate restTemplate) {
 		super();

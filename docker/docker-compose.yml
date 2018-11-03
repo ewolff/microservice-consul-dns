@@ -17,12 +17,17 @@ services:
       - consul
   customer:
     build: ../microservice-consuldns-demo/microservice-consuldns-demo-customer
+    environment:
+    - SERVICE_NAME=msconsuldns-customer
   catalog:
     build: ../microservice-consuldns-demo/microservice-consuldns-demo-catalog
+    environment:
+    - SERVICE_NAME=msconsuldns-catalog
   order:
     build: ../microservice-consuldns-demo/microservice-consuldns-demo-order
     dns: ${CONSUL_HOST}
-    dns_search: .service.consul
+    environment:
+    - SERVICE_NAME=msconsuldns-order
   apache:
     build: apache
     links:
