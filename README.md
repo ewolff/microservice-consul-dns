@@ -10,7 +10,7 @@ This sample is like the sample that you can find at
 This demo uses [Hashicorp Consul](https://www.consul.io) for service
 discovery and Apache httpd as a reverse proxy to route and load balance
 calls to services. It uses Consul as a DNS server for service discovery. 
-Service names are postfixed with `.service.consul`on registration with Consul 
+Service names are postfixed with `.service.consul` on registration with Consul 
 through [Registrator](https://github.com/gliderlabs/registrator)
 which monitors the Unix Socket `docker.sock` and automatically registers and deregisteres 
 all Docker Containers running on a host. Services resolve their 
@@ -36,9 +36,9 @@ host. Also the homepage at port 8080 contains a link to the Consul UI
 Also you can use Consul's DNS interface with e.g. dig:
 
 ```
-dig @localhost order.service.consul.
-dig @localhost order.service.consul. ANY
-dig @localhost order.service.consul. SRV
+dig @localhost msconsuldns_order.service.consul.
+dig @localhost msconsuldns_order.service.consul. ANY
+dig @localhost msconsuldns_order.service.consul. SRV
 ```
 
 Note that the demo uses the original
