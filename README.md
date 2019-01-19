@@ -80,12 +80,6 @@ Technologies
 
 - Consul for Lookup/ Discovery
 - Apache as a reverse proxy to route calls to the appropriate SCS.
-- [Hystrix](https://github.com/netflix/hystrix) is used for resilience. See `CatalogClient` in
-  `com.ewolff.microservice.order.clients` in the microservice-demo-order
-  project . Note that the `CustomerClient` won't use Hystrix. This way
-  you can see how a crash of the Customer microservices makes the
-  Order microservice useless.
-
 
 How To Run
 ----------
@@ -99,8 +93,6 @@ Remarks on the Code
 -------------------
 
 The servers for the infrastructure components are pretty simple thanks to Spring Cloud:
-
-- microservice-consul-demo-turbine can be used to consolidate the Hystrix metrics and has a Hystrix dashboard.
 
 The microservices are:
 

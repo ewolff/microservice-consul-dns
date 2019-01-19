@@ -36,9 +36,3 @@ services:
      - consul
     ports:
      - "8080:80"
-  hystrix-dashboard:
-    build: ../microservice-consuldns-demo/microservice-consuldns-demo-hystrix-dashboard
-    links:
-     - consul
-    ports:
-     - "8989:8989"
