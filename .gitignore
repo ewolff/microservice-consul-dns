@@ -1,5 +1,6 @@
 .DS_Store
 LOG_PATH_IS_UNDEFINED
+.vscode
 .vagrant
 .springBeans
 .classpath
