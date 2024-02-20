@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 # Update Ubuntu
-RUN apt-get update ; apt-get dist-upgrade -y -qq 
+RUN apt-get update ; apt-get dist-upgrade -y -qq
 
 # Install Apache + modules
 RUN apt-get install -y -qq apache2 && \
@@ -10,11 +10,11 @@ RUN apt-get install -y -qq apache2 && \
 
 # Install Consul Templates
 RUN apt-get install -y -qq wget unzip && \
-    wget -nv https://releases.hashicorp.com/consul-template/0.18.0/consul-template_0.18.0_linux_amd64.zip && \
-    unzip consul-template_0.18.0_linux_amd64.zip && \
+    wget -nv https://releases.hashicorp.com/consul-template/0.22.1/consul-template_0.22.1_linux_arm64.zip && \
+    unzip consul-template_0.22.1_linux_arm64.zip && \
     chmod a+x consul-template && \
     mv consul-template /usr/bin/consul-template && \
-    rm consul-template_0.18.0_linux_amd64.zip
+    rm consul-template_0.22.1_linux_arm64.zip
 
 # Config Apache
 COPY index.html /var/www/html/index.html
@@ -24,4 +24,4 @@ COPY 000-default.conf  /etc/apache2/sites-enabled/000-default.conf
 COPY 000-default.ctmpl /etc/apache2/sites-enabled/000-default.ctmpl
 
 EXPOSE 80
-CMD /usr/bin/consul-template -log-level info -consul consul:8500 -template "/etc/apache2/sites-enabled/000-default.ctmpl:/etc/apache2/sites-enabled/000-default.conf:apache2ctl -k graceful"
+CMD /usr/bin/consul-template -log-level info -consul-addr "consul:8500" -template "/etc/apache2/sites-enabled/000-default.ctmpl:/etc/apache2/sites-enabled/000-default.conf:apache2ctl -k graceful"
